@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="tcddDBModelStoreContainer" CdmEntityContainer="tcddDBEntities">
+    <EntitySetMapping Name="Bilets">
+      <EntityTypeMapping TypeName="tcddDBModel.Bilet">
+        <MappingFragment StoreEntitySet="Bilet">
+          <ScalarProperty Name="biletID" ColumnName="biletID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="Cinsiyet" ColumnName="Cinsiyet" />
+          <ScalarProperty Name="seferID" ColumnName="seferID" />
+          <ScalarProperty Name="koltuk" ColumnName="koltuk" />
+          <ScalarProperty Name="CepTelefon" ColumnName="CepTelefon" />
+          <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+          <ScalarProperty Name="satrezv" ColumnName="satrezv" />
+          <ScalarProperty Name="bilettip" ColumnName="bilettip" />
+          <ScalarProperty Name="vagonID" ColumnName="vagonID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Koltuklars">
+      <EntityTypeMapping TypeName="tcddDBModel.Koltuklar">
+        <MappingFragment StoreEntitySet="Koltuklar">
+          <ScalarProperty Name="koltukID" ColumnName="koltukID" />
+          <ScalarProperty Name="koltukno" ColumnName="koltukno" />
+          <ScalarProperty Name="vagonId" ColumnName="vagonId" />
+          <ScalarProperty Name="seferid" ColumnName="seferid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Seferlers">
+      <EntityTypeMapping TypeName="tcddDBModel.Seferler">
+        <MappingFragment StoreEntitySet="Seferler">
+          <ScalarProperty Name="seferID" ColumnName="seferID" />
+          <ScalarProperty Name="cikis" ColumnName="cikis" />
+          <ScalarProperty Name="sure" ColumnName="sure" />
+          <ScalarProperty Name="trenadi" ColumnName="trenadi" />
+          <ScalarProperty Name="CikisSehir" ColumnName="CikisSehir" />
+          <ScalarProperty Name="VarisSehir" ColumnName="VarisSehir" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sehirlers">
+      <EntityTypeMapping TypeName="tcddDBModel.Sehirler">
+        <MappingFragment StoreEntitySet="Sehirler">
+          <ScalarProperty Name="SehirID" ColumnName="SehirID" />
+          <ScalarProperty Name="sehirAdi" ColumnName="sehirAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tarifes">
+      <EntityTypeMapping TypeName="tcddDBModel.Tarife">
+        <MappingFragment StoreEntitySet="Tarife">
+          <ScalarProperty Name="tarifID" ColumnName="tarifID" />
+          <ScalarProperty Name="tarifAdi" ColumnName="tarifAdi" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VagonTips">
+      <EntityTypeMapping TypeName="tcddDBModel.VagonTip">
+        <MappingFragment StoreEntitySet="VagonTip">
+          <ScalarProperty Name="tipID" ColumnName="tipID" />
+          <ScalarProperty Name="tipadi" ColumnName="tipadi" />
+          <ScalarProperty Name="koltuksayisi" ColumnName="koltuksayisi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

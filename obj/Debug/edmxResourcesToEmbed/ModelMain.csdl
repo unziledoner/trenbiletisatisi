@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="tcddDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bilet">
+    <Key>
+      <PropertyRef Name="biletID" />
+    </Key>
+    <Property Name="biletID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="seferID" Type="Int32" />
+    <Property Name="koltuk" Type="Int32" />
+    <Property Name="CepTelefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="satrezv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="bilettip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="vagonID" Type="Int32" />
+    <NavigationProperty Name="Seferler" Relationship="Self.FK_Bilet_Seferler" FromRole="Bilet" ToRole="Seferler" />
+    <NavigationProperty Name="VagonTip" Relationship="Self.FK_Bilet_VagonTip" FromRole="Bilet" ToRole="VagonTip" />
+  </EntityType>
+  <EntityType Name="Koltuklar">
+    <Key>
+      <PropertyRef Name="koltukID" />
+    </Key>
+    <Property Name="koltukID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="koltukno" Type="Int32" />
+    <Property Name="vagonId" Type="Int32" />
+    <Property Name="seferid" Type="Int32" />
+    <NavigationProperty Name="Seferler" Relationship="Self.FK_Koltuklar_Seferler" FromRole="Koltuklar" ToRole="Seferler" />
+    <NavigationProperty Name="VagonTip" Relationship="Self.FK_Koltuklar_VagonTip" FromRole="Koltuklar" ToRole="VagonTip" />
+  </EntityType>
+  <EntityType Name="Seferler">
+    <Key>
+      <PropertyRef Name="seferID" />
+    </Key>
+    <Property Name="seferID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cikis" Type="DateTime" Precision="0" />
+    <Property Name="sure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="trenadi" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="CikisSehir" Type="Int32" />
+    <Property Name="VarisSehir" Type="Int32" />
+    <NavigationProperty Name="Bilets" Relationship="Self.FK_Bilet_Seferler" FromRole="Seferler" ToRole="Bilet" />
+    <NavigationProperty Name="Koltuklars" Relationship="Self.FK_Koltuklar_Seferler" FromRole="Seferler" ToRole="Koltuklar" />
+    <NavigationProperty Name="Sehirler1" Relationship="tcddDBModel.FK_Seferler_Sehirler1" FromRole="Seferler" ToRole="Sehirler" />
+  </EntityType>
+  <EntityType Name="Sehirler">
+    <Key>
+      <PropertyRef Name="SehirID" />
+    </Key>
+    <Property Name="SehirID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sehirAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Seferlers1" Relationship="tcddDBModel.FK_Seferler_Sehirler1" FromRole="Sehirler" ToRole="Seferler" />
+  </EntityType>
+  <EntityType Name="Tarife">
+    <Key>
+      <PropertyRef Name="tarifID" />
+    </Key>
+    <Property Name="tarifID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tarifAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="VagonTip">
+    <Key>
+      <PropertyRef Name="tipID" />
+    </Key>
+    <Property Name="tipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="koltuksayisi" Type="Int32" />
+    <NavigationProperty Name="Bilets" Relationship="Self.FK_Bilet_VagonTip" FromRole="VagonTip" ToRole="Bilet" />
+    <NavigationProperty Name="Koltuklars" Relationship="Self.FK_Koltuklar_VagonTip" FromRole="VagonTip" ToRole="Koltuklar" />
+  </EntityType>
+  <Association Name="FK_Bilet_Seferler">
+    <End Role="Seferler" Type="Self.Seferler" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Bilet" Type="Self.Bilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seferler">
+        <PropertyRef Name="seferID" />
+      </Principal>
+      <Dependent Role="Bilet">
+        <PropertyRef Name="seferID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bilet_VagonTip">
+    <End Role="VagonTip" Type="Self.VagonTip" Multiplicity="0..1" />
+    <End Role="Bilet" Type="Self.Bilet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VagonTip">
+        <PropertyRef Name="tipID" />
+      </Principal>
+      <Dependent Role="Bilet">
+        <PropertyRef Name="vagonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Koltuklar_Seferler">
+    <End Role="Seferler" Type="Self.Seferler" Multiplicity="0..1" />
+    <End Role="Koltuklar" Type="Self.Koltuklar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seferler">
+        <PropertyRef Name="seferID" />
+      </Principal>
+      <Dependent Role="Koltuklar">
+        <PropertyRef Name="seferid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Koltuklar_VagonTip">
+    <End Role="VagonTip" Type="Self.VagonTip" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Koltuklar" Type="Self.Koltuklar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VagonTip">
+        <PropertyRef Name="tipID" />
+      </Principal>
+      <Dependent Role="Koltuklar">
+        <PropertyRef Name="vagonId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="tcddDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bilets" EntityType="Self.Bilet" />
+    <EntitySet Name="Koltuklars" EntityType="Self.Koltuklar" />
+    <EntitySet Name="Seferlers" EntityType="Self.Seferler" />
+    <EntitySet Name="Sehirlers" EntityType="Self.Sehirler" />
+    <EntitySet Name="Tarifes" EntityType="Self.Tarife" />
+    <EntitySet Name="VagonTips" EntityType="Self.VagonTip" />
+    <AssociationSet Name="FK_Bilet_Seferler" Association="Self.FK_Bilet_Seferler">
+      <End Role="Seferler" EntitySet="Seferlers" />
+      <End Role="Bilet" EntitySet="Bilets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bilet_VagonTip" Association="Self.FK_Bilet_VagonTip">
+      <End Role="VagonTip" EntitySet="VagonTips" />
+      <End Role="Bilet" EntitySet="Bilets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Koltuklar_Seferler" Association="Self.FK_Koltuklar_Seferler">
+      <End Role="Seferler" EntitySet="Seferlers" />
+      <End Role="Koltuklar" EntitySet="Koltuklars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Koltuklar_VagonTip" Association="Self.FK_Koltuklar_VagonTip">
+      <End Role="VagonTip" EntitySet="VagonTips" />
+      <End Role="Koltuklar" EntitySet="Koltuklars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Seferler_Sehirler1" Association="tcddDBModel.FK_Seferler_Sehirler1">
+      <End Role="Sehirler" EntitySet="Sehirlers" />
+      <End Role="Seferler" EntitySet="Seferlers" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Seferler_Sehirler1">
+    <End Type="tcddDBModel.Sehirler" Role="Sehirler" Multiplicity="0..1" />
+    <End Type="tcddDBModel.Seferler" Role="Seferler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sehirler">
+        <PropertyRef Name="SehirID" />
+      </Principal>
+      <Dependent Role="Seferler">
+        <PropertyRef Name="CikisSehir" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
