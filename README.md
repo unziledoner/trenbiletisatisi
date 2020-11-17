@@ -1,2 +1,1 @@
 # trenbiletisatisi
-Dev express kullanılmıştır
